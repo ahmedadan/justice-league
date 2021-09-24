@@ -37,7 +37,7 @@ export default class IndividualProfile extends Component {
 
             // trigger timer to reset qrcode
             this.updateQRValue();
-            this.qrInterval = setInterval(() => this.updateQRValue, 30000);
+            this.qrInterval = setInterval(() => this.updateQRValue(), 10000);
 
             this.setState({ renderQR: true });
         }
