@@ -4,6 +4,7 @@ import { Pages } from "./globals/Enums";
 import DummyServerCheck from "./pages/DummyServerCheck";
 import Landing from "./pages/Landing";
 import CreateIndividualProfile from "./pages/CreateIndividualProfile";
+import WelcomePage from "./pages/welcome.js";
 import IndividualProfile from "./pages/IndividualProfile";
 import Scan from "./pages/Scan";
 import ScanData from "./pages/ScanData";
@@ -31,6 +32,9 @@ class App extends React.Component {
         return (
             <div className="App">
                 <DummyServerCheck />
+                {
+                    //<WelcomePage />
+                }
                 <div id="content" style={{ maxWidth: "450px", margin: "auto" }}>
                     {this.state.currentPage === Pages.LANDING && (
                         <Landing setPage={this.setPage} />
