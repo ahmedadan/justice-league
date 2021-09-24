@@ -4,7 +4,8 @@ const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 const totp = require("totp-generator");
 const { v4: uuid } = require('uuid');
-const OTPAuth = require('otpauth')
+const OTPAuth = require('otpauth');
+const base32 = require('base32')
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
 app.get('/signup', (req, res) => {
     const userId = generateUserId();
     const sharedSecret = userId.split("-")[4];
-    res.send(JSON.stringify({userId, sharedSecret}));
+    const encodedSecret = base32.encode(sharedSecret);
+    res.send(JSON.stringify({userId, encodedSecret}));
 });
 
 app.post('/validate', (req, res) => {

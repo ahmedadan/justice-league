@@ -22,6 +22,10 @@ class App extends React.Component {
     setPage(page) {
         this.setState({ currentPage: page });
     }
+    clearData() {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("totpSecret");
+    }
 
     render() {
         return (
@@ -61,6 +65,9 @@ class App extends React.Component {
                     </button>
                     <button onClick={() => this.setPage(Pages.SCAN_DATA)}>
                         scan data
+                    </button>
+                    <button onClick={() => this.clearData()}>
+                        clear user info
                     </button>
                 </div>
                 <ToastContainer position="bottom-center" />
