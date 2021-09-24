@@ -15,9 +15,7 @@ export default class Scan extends Component {
 
     componentDidMount() {
         const videoElem = document.getElementById("qrScan");
-        this.qrScanner = new QrScanner(videoElem, (result) =>
-            console.log("decoded qr code:", result)
-        );
+        this.qrScanner = new QrScanner(videoElem, (result) => {});
         this.qrScanner.start();
     }
     componentWillUnmount() {
@@ -25,8 +23,6 @@ export default class Scan extends Component {
     }
 
     async processQrCodeScan(qrCode) {
-        console.log(qrCode);
-
         try {
             const fields = qrCode.split(",");
             const userId = fields[0];
@@ -48,8 +44,6 @@ export default class Scan extends Component {
             });
 
             const resultJSON = await response.json();
-
-            console.log(resultJSON);
             if (resultJSON) {
                 toast("QR Code Validated!", {
                     type: "success",
@@ -78,8 +72,6 @@ export default class Scan extends Component {
             toast("QR Code is improperly formatted", {
                 type: "error",
             });
-            console.log("invalid qr");
-            console.log(error);
         }
     }
 
