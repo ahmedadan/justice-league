@@ -4,6 +4,7 @@ const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 const totp = require("totp-generator");
 const { v4: uuid } = require('uuid');
+const OTPAuth = require('otpauth')
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -19,7 +20,7 @@ app.get('/signup', (req, res) => {
     res.send(JSON.stringify({userId, sharedSecret}));
 });
 
-app.get('/validate', (req, res) => {
+app.post('/validate', (req, res) => {
     const userId = req.body.userId;
     const token = req.body.token;
     res.send(verify(userId, token));
@@ -30,12 +31,16 @@ app.get("/ping", (req, res) => {
 });
 
 function verify(userId, userTotp) {
-    const totpChallenge = totp(userId.split("-")[4], {
+    let totp = new OTPAuth.TOTP({
         digits: 8,
         period: 60,
-    });
-
-    return totpChallenge === userTotp;
+        secret: userId.split("-")[4]
+    })
+    let ret = totp.validate({
+        token: userTotp,
+        window: 2
+    })
+    return !(ret === null)
 }
 
 function generateUserId() {
