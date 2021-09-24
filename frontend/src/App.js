@@ -7,6 +7,8 @@ import CreateIndividualProfile from "./pages/CreateIndividualProfile";
 import IndividualProfile from "./pages/IndividualProfile";
 import Scan from "./pages/Scan";
 import ScanData from "./pages/ScanData";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends React.Component {
     constructor(props) {
@@ -61,6 +63,7 @@ class App extends React.Component {
                         scan data
                     </button>
                 </div>
+                <ToastContainer position="bottom-center" />
             </div>
         );
     }

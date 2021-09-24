@@ -32,7 +32,7 @@ export default class IndividualProfile extends Component {
             this.totp = new OTPAuth.TOTP({
                 digits: 8,
                 period: 60,
-                secret: this.totpKey,
+                secret: this.totpSecret,
             });
 
             // trigger timer to reset qrcode
