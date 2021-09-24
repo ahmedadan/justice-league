@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Pages } from "../globals/Enums";
 import QRCode from "react-qr-code";
 import * as OTPAuth from "otpauth";
+import UploadBanner from "../upload-banner.png";
+import UploadText from "../upload-text.png";
+import UploadButton from "../upload-button.svg";
+import Grid from "@material-ui/core/Grid";
 
 export default class IndividualProfile extends Component {
     constructor(props) {
@@ -85,16 +89,22 @@ export default class IndividualProfile extends Component {
 
     render() {
         return (
-            <div style={{ padding: "50px" }}>
-                <div
+            <div>
+                <img
+                    style={{ justify: "center", maxWidth: 500 }}
+                    src={UploadBanner}
+                />
+                <h3 style={{ paddingBottom: "20px" }}>COVID Passport</h3>
+
+                <img
+                    hidden={this.state.renderQR}
                     style={{
-                        display: "inline-block",
-                        width: "100%",
-                        height: "100px",
+                        justify: "center",
+                        maxWidth: 300,
+                        paddingBottom: "50px",
                     }}
-                >
-                    COVID Passport
-                </div>
+                    src={UploadText}
+                />
 
                 <div hidden={this.state.renderQR}>
                     <div
@@ -102,50 +112,73 @@ export default class IndividualProfile extends Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
-                            width: "328px",
-                            height: "188px",
-                            background: "#240D53",
-                            boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.15)",
-                            borderRadius: "20px",
-                            fontFamily: "SF Pro Display",
-                            fontStyle: "normal",
-                            fontWeight: "600",
-                            lineHeight: "25px",
-                            fontSize: "14px",
-                            color: "#FFFFFF",
                         }}
                     >
-                        You have not created a COVID Passport yet.
-                        <br />
-                        Please upload your vaccination receipt.
-                        <input
-                            type="file"
-                            ref={this.fileInput}
+                        <div
                             style={{
-                                marginLeft: "65px",
+                                justify: "center",
+                                alignItems: "center",
+                                paddingBottom: "30px",
                             }}
-                            onChange={this.handleFileChange}
-                        />
-                        <button
-                            style={{
-                                width: "80px",
-                                margin: "5px",
-                                marginLeft: "124px",
-                                backgroundColor: "green",
-                            }}
-                            disabled={!this.state.hasFile}
-                            onClick={() => this.uploadReceipt()}
                         >
-                            Upload!
-                        </button>
+                            <input
+                                style={{
+                                    backgroundColor: "#4CAF50",
+                                    border: "none",
+                                    color: "white",
+                                    padding: "16px 32px",
+                                    margin: "4px 2px",
+                                }}
+                                src="../upload-button.svg"
+                                type="file"
+                                ref={this.fileInput}
+                                style={{
+                                    marginLeft: "65px",
+                                }}
+                                onChange={this.handleFileChange}
+                            />
+                        </div>
+
+                        <div
+                            style={{ justify: "center", alignItems: "center" }}
+                        >
+                            <button
+                                style={{
+                                    backgroundColor: "#240D53",
+                                    border: "none",
+                                    color: "white",
+                                    padding: "16px 32px",
+                                    margin: "4px 2px",
+                                    cursor: "pointer",
+                                    minWidth: "200px",
+                                    borderRadius: "50px",
+                                }}
+                                disabled={!this.state.hasFile}
+                                onClick={() => this.uploadReceipt()}
+                            >
+                                Upload!
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div hidden={!this.state.renderQR || this.state.QRValue === ""}>
                     <QRCode value={this.state.QRValue} />
                 </div>
 
-                <button onClick={() => this.props.setPage(Pages.LANDING)}>
-                    back
+                <button
+                    style={{
+                        backgroundColor: "#A5DED2",
+                        border: "none",
+                        color: "white",
+                        padding: "16px 32px",
+                        margin: "4px 2px",
+                        cursor: "pointer",
+                        minWidth: "100px",
+                        borderRadius: "50px",
+                    }}
+                    onClick={() => this.props.setPage(Pages.LANDING)}
+                >
+                    Back
                 </button>
             </div>
         );
