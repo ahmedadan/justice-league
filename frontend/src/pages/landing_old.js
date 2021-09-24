@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#FFFFFF",
-    fontSize: "48px"
+    fontSize: "30px"
   },
   individualButton: {
     backgroundColor: "#FFFFFF", 
