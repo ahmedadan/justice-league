@@ -30,7 +30,7 @@ export default class IndividualProfile extends Component {
             this.email = localStorage.getItem("email");
 
             this.totp = new OTPAuth.TOTP({
-                digits: 6,
+                digits: 8,
                 period: 60,
                 secret: this.totpKey,
             });
