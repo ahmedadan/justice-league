@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Pages } from "../globals/Enums";
 import QRCode from "react-qr-code";
 import * as OTPAuth from "otpauth";
@@ -6,6 +6,10 @@ import * as OTPAuth from "otpauth";
 export default class IndividualProfile extends Component {
     constructor(props) {
         super(props);
+
+        this.fileInput = React.createRef();
+        this.handleFileChange = this.handleFileChange.bind(this);
+
         this.state = {
             renderQR: false,
             QRValue: "",
@@ -21,6 +25,13 @@ export default class IndividualProfile extends Component {
     qrInterval;
 
     componentDidMount() {
+        this.readQRInfo();
+    }
+    componentDidUpdate() {
+        console.log(this.state.renderQR);
+    }
+
+    readQRInfo() {
         this.userId = localStorage.getItem("userId");
         this.totpSecret = localStorage.getItem("totpSecret");
 
@@ -56,7 +67,24 @@ export default class IndividualProfile extends Component {
         });
     }
 
-    renderModal() {}
+    handleFileChange(fileEvent) {
+        this.setState({
+            hasFile: !!fileEvent.target.files[0],
+        });
+    }
+
+    async uploadReceipt() {
+        const response = await fetch("/signup");
+        const responseJson = await response.json();
+
+        const userId = responseJson["userId"];
+        const secret = responseJson["sharedSecret"];
+
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("totpSecret", secret);
+
+        this.readQRInfo();
+    }
 
     render() {
         return (
@@ -69,34 +97,51 @@ export default class IndividualProfile extends Component {
                     }}
                 >
                     COVID Passport
-                    <button
-                        style={{
-                            marginLeft: "50px",
-                        }}
-                        hidden={this.state.renderQR}
-                        onClick={() => this.renderModal()}
-                    >
-                        +
-                    </button>
                 </div>
 
-                <div
-                    hidden={this.state.renderQR}
-                    style={{
-                        width: "328px",
-                        height: "188px",
-                        background: "#240D53",
-                        boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.15)",
-                        borderRadius: "20px",
-                        fontFamily: "SF Pro Display",
-                        fontStyle: "normal",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        lineHeight: "188px",
-                        color: "#FFFFFF",
-                    }}
-                >
-                    You have not created a COVID Passport yet
+                <div hidden={this.state.renderQR}>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            width: "328px",
+                            height: "188px",
+                            background: "#240D53",
+                            boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.15)",
+                            borderRadius: "20px",
+                            fontFamily: "SF Pro Display",
+                            fontStyle: "normal",
+                            fontWeight: "600",
+                            lineHeight: "25px",
+                            fontSize: "14px",
+                            color: "#FFFFFF",
+                        }}
+                    >
+                        You have not created a COVID Passport yet.
+                        <br />
+                        Please upload your vaccination receipt.
+                        <input
+                            type="file"
+                            ref={this.fileInput}
+                            style={{
+                                marginLeft: "65px",
+                            }}
+                            onChange={this.handleFileChange}
+                        />
+                        <button
+                            style={{
+                                width: "80px",
+                                margin: "5px",
+                                marginLeft: "124px",
+                                backgroundColor: "green",
+                            }}
+                            disabled={!this.state.hasFile}
+                            onClick={() => this.uploadReceipt()}
+                        >
+                            Upload!
+                        </button>
+                    </div>
                 </div>
                 <div hidden={!this.state.renderQR || this.state.QRValue === ""}>
                     <QRCode value={this.state.QRValue} />
