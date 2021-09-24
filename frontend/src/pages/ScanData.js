@@ -7,12 +7,32 @@ export default class ScanData extends Component {
         this.state = {};
     }
     render() {
+        const scanData = JSON.parse(localStorage.getItem("scanned_people"));
+
+        const tableRows = scanData.map((user) => {
+            return (
+                <tr>
+                    <td>{user.userId}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.timestamp}</td>
+                </tr>
+            );
+        });
+
         return (
             <div>
-                ScanData Page
-                <button onClick={() => this.props.setPage(Pages.LANDING)}>
-                    back
-                </button>
+                <table>
+                    <tr>
+                        <th>Identifier</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Time</th>
+                    </tr>
+                    {tableRows}
+                </table>
             </div>
         );
     }

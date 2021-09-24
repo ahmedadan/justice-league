@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { Pages } from "./globals/Enums";
 import DummyServerCheck from "./pages/DummyServerCheck";
-import Landing from "./pages/Landing";
 import CreateIndividualProfile from "./pages/CreateIndividualProfile";
 import WelcomePage from "./pages/welcome.js";
 import IndividualProfile from "./pages/IndividualProfile";
@@ -29,6 +28,7 @@ class App extends React.Component {
     }
 
     render() {
+        const isDev = true;
         return (
             <div className="App">
                 <DummyServerCheck />
@@ -57,27 +57,34 @@ class App extends React.Component {
                         <ScanData setPage={this.setPage} />
                     )}
                 </div>
-                <button onClick={() => this.setPage(Pages.LANDING)}>
-                    welcome
-                </button>
-                <button
-                    onClick={() =>
-                        this.setPage(Pages.CREATE_INDIVIDUAL_PROFILE)
-                    }
-                >
-                    create individual profile
-                </button>
-                <button onClick={() => this.setPage(Pages.INDIVIDUAL_PROFILE)}>
-                    individual profile
-                </button>
-                <button onClick={() => this.setPage(Pages.SCAN)}>scan</button>
-                <button onClick={() => this.setPage(Pages.SCAN_DATA)}>
-                    scan data
-                </button>
-                <br />
-                <button onClick={() => this.clearData()}>
-                    clear user info
-                </button>
+                <div hidden={!isDev}>
+                    <button onClick={() => this.setPage(Pages.LANDING)}>
+                        welcome
+                    </button>
+                    <button
+                        onClick={() =>
+                            this.setPage(Pages.CREATE_INDIVIDUAL_PROFILE)
+                        }
+                    >
+                        create individual profile
+                    </button>
+                    <button
+                        onClick={() => this.setPage(Pages.INDIVIDUAL_PROFILE)}
+                    >
+                        individual profile
+                    </button>
+                    <button onClick={() => this.setPage(Pages.SCAN)}>
+                        scan
+                    </button>
+                    <button onClick={() => this.setPage(Pages.SCAN_DATA)}>
+                        scan data
+                    </button>
+                    <br />
+                    <button onClick={() => this.clearData()}>
+                        clear user info
+                    </button>
+                </div>
+
                 <ToastContainer position="bottom-center" />
             </div>
         );
