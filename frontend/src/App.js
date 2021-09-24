@@ -19,7 +19,6 @@ class App extends React.Component {
     }
     setPage(page) {
         this.setState({ currentPage: page });
-        console.log(this.state.currentPage);
     }
 
     render() {
