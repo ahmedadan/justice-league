@@ -1,13 +1,14 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
+import {Button, Input} from '@material-ui/core';
 import { makeStyles } from "@material-ui/core";
+
 //import ButtonGreen from "../components/ButtonGreen.js";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 // import IndigoWave from "../../assets/IndigoWave.png";
-import BackgroundImage from "../BackgroundImage2.png";
-import LeagueLogo from "../league_logo.svg";
+import BackgroundImage from "../BackgroundImage_plain.png";
+import Syringe from "../syringe-graphic.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,50 +24,29 @@ const useStyles = makeStyles((theme) => ({
     height: "1000px", 
     backgroundImage: `url(${BackgroundImage})`,
     backgroundRepeat: 'no-repeat',
-    maxWidth: '500px',
+    maxWidth: '400px',
     maxHeight: '600px',
-    justify:"center"
-
-  },
-  welcome: {
-    color: "#322061",
-    fontSize: "20px",
-    fontWeight: "bold",
     justify:"center"
   },
   title: {
     align: "center",
-    color: "#322061",
-    fontSize: "30px",
+    color: "#6376E5",
+    fontSize: "20px",
     fontWeight: "bold",
-    paddingTop: "10px"
+    paddingTop: "80px",
+    paddingRight: "20px"
   },
   titleBlock: {
+    paddingTop: "40px",
     justifyContent: "center",
-    paddingTop: "350px"
   },
-  consumer: {
-    fontSize: "19px",
-    fontWeight: "bold",
-    paddingLeft: "5px",
-    marginBottom: "2px"
+  syringe: {
+    width: "120px",
+    height: "110px",
+    paddingTop: "50px"
   },
-  league: {
-    fontSize: "10px",
-    color: "#666565",
-    paddingTop: "5px",
-    marginRight: "-20px"
-  },
-  leagueLogo: {
-    height: "60%",
-    width: "150px"
-  },
-  logoBlock: {
-    paddingTop: "100px",
-    paddingLeft: "30px;"
-  },
-  individualButton: {
-    backgroundColor: "#322061", 
+  uploadButton: {
+    backgroundColor: "#04C49C", 
     color: "#FFFFFF", 
     borderRadius: 30, 
     padding: 20,
@@ -75,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     textTransform: "inherit",
   },
-  orgButton: {
+  inputBoxes: {
     marginTop: "30px",
     backgroundColor: "#FFFFFF", 
     borderColor: "#322061",
@@ -87,16 +67,18 @@ const useStyles = makeStyles((theme) => ({
     //boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
     width:"250px",
     height: "50px",
-    textTransform: "inherit"
+    textTransform: "inherit",
   },
   buttonSpacing: {
     align:"center",
-    paddingTop: "100px"
+  },
+  inputSection: {
+    paddingTop: "20px"
   },
   continueButtonSpacing: {
-    paddingTop: "150px",
+    paddingTop: "75px",
     justifyContent: "center",
-    paddingBottom: "600px",
+    paddingBottom: "50px"
   }
 }));
 
@@ -106,12 +88,29 @@ export default function LandingPage() {
   return (
     <div justify="center" className={classes.overall}>
       <Grid container justify="center">
-        
-        <Grid container justify="center" className={classes.logoBlock}>
-          <Typography className={classes.league}>
-            Powered by
+        <Grid container justify="center" className={classes.titleBlock}>
+          <Typography className={classes.title}>
+            Build Profile
           </Typography>
-          <img src={LeagueLogo} className={classes.leagueLogo} alt="Logo" />
+          <img src={Syringe} className={classes.syringe} />
+        </Grid>
+
+        <Grid container justify="center" className={classes.inputSection}>
+            <Grid item className={classes.buttonSpacing}>
+              <Input underlineColor="transparent" className={classes.inputBoxes} placeholder="Name"></Input>
+            </Grid>
+            <Grid item className={classes.buttonSpacing}>
+              <Input className={classes.inputBoxes} placeholder="Email"></Input>
+            </Grid>
+            <Grid item className={classes.buttonSpacing}>
+              <Input className={classes.inputBoxes} placeholder="Phone Number"></Input>
+            </Grid>
+        </Grid>
+
+        <Grid container justify="center">
+            <Grid item className={classes.continueButtonSpacing}>
+              <Button className={classes.uploadButton}>Build my profile</Button>
+            </Grid>
         </Grid>
     </Grid>
 

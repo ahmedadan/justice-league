@@ -22,7 +22,7 @@ const showIndividualProfile = () => {
 };
 
 const showWelcomePage = () => {
-  if (window.location.pathname === "/individualprofile") {
+  if (window.location.pathname === "/individualprofile" || window.location.pathname === "/individual") {
     return <IndividualProfile />;
   }
 };
