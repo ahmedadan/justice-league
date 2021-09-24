@@ -3,7 +3,7 @@ import { Pages } from "../globals/Enums";
 import QrScanner from "qr-scanner";
 
 import { toast } from "react-toastify";
-import {Button} from '@material-ui/core';
+import { Button } from "@material-ui/core";
 import BackgroundImage from "../BackgroundImage_plain.png";
 
 QrScanner.WORKER_PATH = "../qr-scanner-worker.min.js";
@@ -93,41 +93,71 @@ export default class Scan extends Component {
                     display: "in-line",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    maxWidth: '100%',
-                    maxHeight: '100px',
-                    backgroundImage: `url(${BackgroundImage})`
+                    maxWidth: "100%",
+                    maxHeight: "100px",
+                    backgroundImage: `url(${BackgroundImage})`,
                 }}
             >
-                <div style={{backgroundColor: "#322061", borderRadius: "10px"}}>
-                    <video id="qrScan" style={{height: "80%", width: "80%"}}></video>
+                <div
+                    style={{ backgroundColor: "#322061", borderRadius: "10px" }}
+                >
+                    <video
+                        id="qrScan"
+                        style={{ height: "80%", width: "80%" }}
+                    ></video>
                 </div>
-                <Button onClick={() => this.scanImage()}
-                style={{
-                    backgroundColor: "#FFFFFF", 
-                    borderColor: "#322061",
-                    border: "2px solid",
-                    color: "#322061", 
-                    borderRadius:30, 
-                    padding:20, 
-                    margin:10, 
-                    width:"150px",
-                    height: "50px",
-                    textTransform: "inherit"
-                }}> Scan </Button>
-                <Button onClick={() => this.props.setPage(Pages.LANDING)} 
-                style={{
-                    backgroundColor: "#FFFFFF", 
-                    borderColor: "#322061",
-                    border: "2px solid",
-                    color: "#322061", 
-                    borderRadius:30, 
-                    padding:20, 
-                    margin:10, 
-                    //boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
-                    width:"150px",
-                    height: "50px",
-                    textTransform: "inherit"
-                }}>
+                <Button
+                    onClick={() => this.scanImage()}
+                    style={{
+                        backgroundColor: "#FFFFFF",
+                        borderColor: "#322061",
+                        border: "2px solid",
+                        color: "#322061",
+                        borderRadius: 30,
+                        padding: 20,
+                        margin: 10,
+                        width: "150px",
+                        height: "50px",
+                        textTransform: "inherit",
+                    }}
+                >
+                    {" "}
+                    Scan{" "}
+                </Button>
+                <Button
+                    onClick={() => this.props.setPage(Pages.SCAN_DATA)}
+                    style={{
+                        backgroundColor: "#FFFFFF",
+                        borderColor: "#322061",
+                        border: "2px solid",
+                        color: "#322061",
+                        borderRadius: 30,
+                        padding: 20,
+                        margin: 10,
+                        //boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
+                        width: "150px",
+                        height: "50px",
+                        textTransform: "inherit",
+                    }}
+                >
+                    View Data
+                </Button>
+                <Button
+                    onClick={() => this.props.setPage(Pages.LANDING)}
+                    style={{
+                        backgroundColor: "#FFFFFF",
+                        borderColor: "#322061",
+                        border: "2px solid",
+                        color: "#322061",
+                        borderRadius: 30,
+                        padding: 20,
+                        margin: 10,
+                        //boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
+                        width: "150px",
+                        height: "50px",
+                        textTransform: "inherit",
+                    }}
+                >
                     Back
                 </Button>
             </div>

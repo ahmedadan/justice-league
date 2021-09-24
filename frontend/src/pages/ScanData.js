@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Pages } from "../globals/Enums";
+import { Button } from "@material-ui/core";
 
 export default class ScanData extends Component {
     constructor(props) {
@@ -33,6 +34,24 @@ export default class ScanData extends Component {
                     </tr>
                     {tableRows}
                 </table>
+                <Button
+                    onClick={() => this.props.setPage(Pages.SCAN)}
+                    style={{
+                        backgroundColor: "#FFFFFF",
+                        borderColor: "#322061",
+                        border: "2px solid",
+                        color: "#322061",
+                        borderRadius: 30,
+                        padding: 20,
+                        margin: 10,
+                        //boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
+                        width: "150px",
+                        height: "50px",
+                        textTransform: "inherit",
+                    }}
+                >
+                    Back
+                </Button>
             </div>
         );
     }

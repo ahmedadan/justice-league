@@ -31,7 +31,9 @@ class App extends React.Component {
         const isDev = true;
         return (
             <div className="App">
-                <DummyServerCheck />
+                {
+                    //<DummyServerCheck />
+                }
                 <div
                     id="content"
                     style={{
