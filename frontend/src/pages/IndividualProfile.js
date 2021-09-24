@@ -31,9 +31,6 @@ export default class IndividualProfile extends Component {
     componentDidMount() {
         this.readQRInfo();
     }
-    componentDidUpdate() {
-        console.log(this.state.renderQR);
-    }
 
     readQRInfo() {
         this.userId = localStorage.getItem("userId");
@@ -82,7 +79,7 @@ export default class IndividualProfile extends Component {
         const responseJson = await response.json();
 
         const userId = responseJson["userId"];
-        const secret = responseJson["sharedSecret"];
+        const secret = responseJson["encodedSecret"];
 
         localStorage.setItem("userId", userId);
         localStorage.setItem("totpSecret", secret);

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const totp = require("totp-generator");
 const { v4: uuid } = require('uuid');
 const OTPAuth = require('otpauth');
-const base32 = require('base32')
+const base32 = require('hi-base32');
 
 let userDB = {}
 
@@ -21,7 +21,7 @@ app.get('/signup', (req, res) => {
     const userId = generateUserId();
     const sharedSecret = userId.split("-")[4];
     const encodedSecret = base32.encode(sharedSecret);
-    userDB[userId] = encodedSecret
+    userDB[userId] = encodedSecret;
     res.send(JSON.stringify({userId, encodedSecret}));
 });
 

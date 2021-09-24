@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 // import IndigoWave from "../../assets/IndigoWave.png";
 import BackgroundImage from "../BackgroundImage_plain.png";
 import Syringe from "../syringe-graphic.png";
+import { Pages } from "../globals/Enums";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,8 +83,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CreateIndividualProfile() {
+export default function CreateIndividualProfile(props) {
     const classes = useStyles();
+
+    let userInfo = {};
+
+    const handleChange = (param, value) => {
+        userInfo[param] = value.target.value;
+    };
+    const handleSubmit = () => {
+        if (userInfo.name) {
+            localStorage.setItem("name", userInfo.name);
+        }
+        if (userInfo.email) {
+            localStorage.setItem("email", userInfo.email);
+        }
+        if (userInfo.phone) {
+            localStorage.setItem("phone", userInfo.phone);
+        }
+        props.setPage(Pages.INDIVIDUAL_PROFILE);
+    };
 
     return (
         <div justify="center" className={classes.overall}>
@@ -102,19 +121,21 @@ export default function CreateIndividualProfile() {
                 >
                     <Grid item className={classes.buttonSpacing}>
                         <Input
-                            underlineColor="transparent"
+                            onChange={(value) => handleChange("name", value)}
                             className={classes.inputBoxes}
                             placeholder="Name"
                         ></Input>
                     </Grid>
                     <Grid item className={classes.buttonSpacing}>
                         <Input
+                            onChange={(value) => handleChange("email", value)}
                             className={classes.inputBoxes}
                             placeholder="Email"
                         ></Input>
                     </Grid>
                     <Grid item className={classes.buttonSpacing}>
                         <Input
+                            onChange={(value) => handleChange("phone", value)}
                             className={classes.inputBoxes}
                             placeholder="Phone Number"
                         ></Input>
@@ -123,7 +144,10 @@ export default function CreateIndividualProfile() {
 
                 <Grid container justify="center">
                     <Grid item className={classes.continueButtonSpacing}>
-                        <Button className={classes.uploadButton}>
+                        <Button
+                            onClick={() => handleSubmit()}
+                            className={classes.uploadButton}
+                        >
                             Build my profile
                         </Button>
                     </Grid>
