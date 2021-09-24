@@ -6,6 +6,8 @@ const totp = require("totp-generator");
 const { v4: uuid } = require('uuid');
 const OTPAuth = require('otpauth')
 
+let userDB = {}
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(bodyParser.json());
@@ -16,7 +18,8 @@ app.get('/', (req, res) => {
 
 app.get('/signup', (req, res) => {
     const userId = generateUserId();
-    const sharedSecret = userId.split("-")[4];
+    const sharedSecret = generateUserId()
+    userDB[userId] = sharedSecret
     res.send(JSON.stringify({userId, sharedSecret}));
 });
 
@@ -34,7 +37,7 @@ function verify(userId, userTotp) {
     let totp = new OTPAuth.TOTP({
         digits: 8,
         period: 60,
-        secret: userId.split("-")[4]
+        secret: userDB[userId]
     })
     let ret = totp.validate({
         token: userTotp,
