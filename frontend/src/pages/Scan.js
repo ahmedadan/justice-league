@@ -54,7 +54,21 @@ export default class Scan extends Component {
                 toast("QR Code Validated!", {
                     type: "success",
                 });
-                // save values
+
+                let currentList = JSON.parse(
+                    localStorage.getItem("scanned_people") || "[]"
+                );
+                currentList.push({
+                    userId: userId,
+                    name: name ?? "",
+                    email: email ?? "",
+                    phone: phone ?? "",
+                    timestamp: new Date().toLocaleString(),
+                });
+                localStorage.setItem(
+                    "scanned_people",
+                    JSON.stringify(currentList)
+                );
             } else {
                 toast("QR Code is not valid.", {
                     type: "error",
