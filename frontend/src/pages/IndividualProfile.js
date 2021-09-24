@@ -92,11 +92,22 @@ export default class IndividualProfile extends Component {
 
     render() {
         return (
-            <div >
-                <img style={{justify:"center", maxWidth:500}} src={UploadBanner}/>
-                <h3 style={{paddingBottom: '20px'}}>COVID Passport</h3>
+            <div>
+                <img
+                    style={{ justify: "center", maxWidth: 500 }}
+                    src={UploadBanner}
+                />
+                <h3 style={{ paddingBottom: "20px" }}>COVID Passport</h3>
 
-                <img style={{justify:"center", maxWidth:300, paddingBottom: '50px'}} src={UploadText}/>
+                <img
+                    hidden={this.state.renderQR}
+                    style={{
+                        justify: "center",
+                        maxWidth: 300,
+                        paddingBottom: "50px",
+                    }}
+                    src={UploadText}
+                />
 
                 <div hidden={this.state.renderQR}>
                     <div
@@ -104,46 +115,52 @@ export default class IndividualProfile extends Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
-  
                         }}
                     >
-
-                      <div style={{justify: 'center', alignItems: 'center', paddingBottom:'30px'}}>
-                        <input
+                        <div
                             style={{
-                              backgroundColor: '#4CAF50',
-                              border: 'none',
-                              color: 'white',
-                              padding: '16px 32px',
-                              margin: '4px 2px',
+                                justify: "center",
+                                alignItems: "center",
+                                paddingBottom: "30px",
                             }}
-                            src="../upload-button.svg"
-                            type="file"
-                            ref={this.fileInput}
-                            style={{
-                                marginLeft: "65px",
-                            }}
-                            onChange={this.handleFileChange}
-                        />
-                      </div>
+                        >
+                            <input
+                                style={{
+                                    backgroundColor: "#4CAF50",
+                                    border: "none",
+                                    color: "white",
+                                    padding: "16px 32px",
+                                    margin: "4px 2px",
+                                }}
+                                src="../upload-button.svg"
+                                type="file"
+                                ref={this.fileInput}
+                                style={{
+                                    marginLeft: "65px",
+                                }}
+                                onChange={this.handleFileChange}
+                            />
+                        </div>
 
-                        <div style={{justify: 'center', alignItems: 'center'}}>
-                          <button
-                              style={{
-                                backgroundColor: '#240D53',
-                                border: 'none',
-                                color: 'white',
-                                padding: '16px 32px',
-                                margin: '4px 2px',
-                                cursor: 'pointer',
-                                minWidth: '200px',
-                                borderRadius: '50px'
-                              }}
-                              disabled={!this.state.hasFile}
-                              onClick={() => this.uploadReceipt()}
-                          >
-                              Upload!
-                          </button>
+                        <div
+                            style={{ justify: "center", alignItems: "center" }}
+                        >
+                            <button
+                                style={{
+                                    backgroundColor: "#240D53",
+                                    border: "none",
+                                    color: "white",
+                                    padding: "16px 32px",
+                                    margin: "4px 2px",
+                                    cursor: "pointer",
+                                    minWidth: "200px",
+                                    borderRadius: "50px",
+                                }}
+                                disabled={!this.state.hasFile}
+                                onClick={() => this.uploadReceipt()}
+                            >
+                                Upload!
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -153,17 +170,17 @@ export default class IndividualProfile extends Component {
 
                 <button
                     style={{
-                      backgroundColor: '#A5DED2',
-                      border: 'none',
-                      color: 'white',
-                      padding: '16px 32px',
-                      margin: '4px 2px',
-                      cursor: 'pointer',
-                      minWidth: '100px',
-                      borderRadius: '50px'
-
+                        backgroundColor: "#A5DED2",
+                        border: "none",
+                        color: "white",
+                        padding: "16px 32px",
+                        margin: "4px 2px",
+                        cursor: "pointer",
+                        minWidth: "100px",
+                        borderRadius: "50px",
                     }}
-                    onClick={() => this.props.setPage(Pages.LANDING)}>
+                    onClick={() => this.props.setPage(Pages.LANDING)}
+                >
                     Back
                 </button>
             </div>
